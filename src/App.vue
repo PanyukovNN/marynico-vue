@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>Parent: {{ carName }}</h1>
+
+    <app-counter></app-counter>
+
+    <app-car
+      :carName="carName"
+      :carYear="carYear"
+      :changeFunc="changeNameToAudi"
+      @nameChanged="carName = $event"
+      @counterUpdated="counter = $event"
+    ></app-car>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Car from './Car.vue'
+import Counter from './Counter.vue'
 
 export default {
-  name: 'App',
+  data () {
+    return {
+      carName: 'Ford',
+      carYear: 2018
+    }
+  },
+  methods: {
+    changeNameToAudi() {
+      this.carName = 'Audi'
+    }
+  },
   components: {
-    HelloWorld
+    appCar: Car,
+    appCounter: Counter
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
